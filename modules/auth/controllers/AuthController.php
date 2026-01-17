@@ -77,6 +77,18 @@ class AuthController
             Response::error('Bu e-posta adresi zaten kayıtlı', 400);
         }
         
+        // Üniversiteden tenant bul (öğrenci için)
+        $tenantId = null;
+        if (($data['role'] ?? 'beneficiary') === 'beneficiary' && !empty($data['university_id'])) {
+            $tenant = $this->db->queryOne(
+                "SELECT id FROM tenants WHERE university_id = :uid AND is_active = true",
+                ['uid' => $data['university_id']]
+            );
+            if ($tenant) {
+                $tenantId = $tenant['id'];
+            }
+        }
+        
         // Kullanıcı oluştur
         try {
             $this->db->beginTransaction();
@@ -88,7 +100,7 @@ class AuthController
                 'last_name' => $data['last_name'],
                 'phone' => $data['phone'] ?? null,
                 'role' => $data['role'] ?? 'beneficiary',
-                'tenant_id' => $data['tenant_id'] ?? null,
+                'tenant_id' => $tenantId,
                 'is_active' => true
             ]);
             
@@ -96,14 +108,25 @@ class AuthController
             if (($data['role'] ?? 'beneficiary') === 'beneficiary') {
                 $beneficiaryId = $this->db->insert('beneficiaries', [
                     'user_id' => $userId,
-                    'tenant_id' => $data['tenant_id'],
-                    'type' => $data['beneficiary_type'] ?? 'university',
+                    'tenant_id' => $tenantId,
+                    'type' => 'university',
                     'verification_status' => 'pending'
                 ]);
+                
+                // Üniversite detayları
+                if (!empty($data['university_id'])) {
+                    $this->db->insert('beneficiary_university', [
+                        'beneficiary_id' => $beneficiaryId,
+                        'university_id' => $data['university_id'],
+                        'student_number' => $data['student_number'] ?? null,
+                        'faculty' => $data['faculty'] ?? null,
+                        'department' => $data['department'] ?? null
+                    ]);
+                }
             } elseif (($data['role'] ?? '') === 'donor') {
                 $this->db->insert('donors', [
                     'user_id' => $userId,
-                    'is_corporate' => $data['is_corporate'] ?? false,
+                    'is_corporate' => ($data['is_corporate'] ?? false) === true || ($data['is_corporate'] ?? '') === 'true',
                     'company_name' => $data['company_name'] ?? null
                 ]);
             }
@@ -125,7 +148,8 @@ class AuthController
             
         } catch (\Exception $e) {
             $this->db->rollback();
-            Response::serverError('Kayıt sırasında bir hata oluştu');
+            error_log('Register error: ' . $e->getMessage());
+            Response::serverError('Kayıt sırasında bir hata oluştu: ' . $e->getMessage());
         }
     }
     
