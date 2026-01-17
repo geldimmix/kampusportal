@@ -397,6 +397,86 @@
             height: 20px;
         }
         
+        .btn-secondary {
+            width: 100%;
+            padding: 14px 24px;
+            background: var(--surface-alt);
+            color: var(--ink);
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        
+        .btn-link {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: var(--ink-light);
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 16px;
+            transition: color 0.2s;
+        }
+        
+        .btn-link:hover {
+            color: var(--ink);
+        }
+        
+        /* Code Sent Notice */
+        .code-sent-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--teal-light);
+            border: 1px solid var(--teal);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .code-sent-notice svg {
+            width: 24px;
+            height: 24px;
+            color: var(--teal-dark);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .code-sent-notice strong {
+            display: block;
+            font-size: 15px;
+            color: var(--teal-dark);
+            margin-bottom: 4px;
+        }
+        
+        .code-sent-notice p {
+            font-size: 14px;
+            color: var(--teal-dark);
+            margin: 0;
+        }
+        
+        /* Code Input */
+        .code-input {
+            font-size: 24px !important;
+            letter-spacing: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
         /* Steps */
         .verification-steps {
             display: flex;
@@ -719,15 +799,15 @@
             <div class="verification-body">
                 <!-- Steps -->
                 <div class="verification-steps">
-                    <div class="step active">
+                    <div class="step active" id="step1">
                         <div class="step-number">1</div>
                         <div class="step-text">Bilgi Girişi</div>
                     </div>
-                    <div class="step">
+                    <div class="step" id="step2">
                         <div class="step-number">2</div>
-                        <div class="step-text">Doğrulama</div>
+                        <div class="step-text">Kod Doğrulama</div>
                     </div>
-                    <div class="step">
+                    <div class="step" id="step3">
                         <div class="step-number">3</div>
                         <div class="step-text">Onay</div>
                     </div>
@@ -742,46 +822,71 @@
                     </svg>
                     <div class="alert-box-content">
                         <h4>Neden Doğrulama Gerekli?</h4>
-                        <p>Sistemin kötüye kullanımını önlemek ve yardımların gerçek ihtiyaç sahiplerine ulaşmasını sağlamak için üniversite öğrenci bilgi sistemleri üzerinden kimlik doğrulaması yapıyoruz.</p>
+                        <p>Sistemin kötüye kullanımını önlemek ve yardımların gerçek ihtiyaç sahiplerine ulaşmasını sağlamak için üniversite e-posta adresinize doğrulama kodu gönderiyoruz.</p>
                     </div>
                 </div>
                 
-                <!-- Security Notice -->
-                <div class="security-notice">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    <p><strong>Şifreniz kesinlikle saklanmayacaktır.</strong> Üniversite bilgi sistemi üzerinden tek seferlik doğrulama yapılacak, şifreniz sunucularımızda tutulmayacaktır. Sadece öğrenci olduğunuz bilgisi doğrulandıktan sonra hesabınız aktif edilecektir.</p>
-                </div>
-                
-                <!-- Form -->
-                <form id="verificationForm">
-                    <div class="form-group">
-                        <label for="edu_email">Üniversite E-posta Adresi</label>
-                        <input type="email" id="edu_email" name="edu_email" placeholder="ogrenci@selcuk.edu.tr" required>
-                        <p class="form-hint">Üniversiteniz tarafından verilen .edu.tr uzantılı e-posta adresinizi girin</p>
-                    </div>
-                    
-                    <div class="form-row">
+                <!-- Step 1: Email & Student Number Form -->
+                <div id="formStep1">
+                    <form id="verificationForm">
+                        <div class="form-group">
+                            <label for="edu_email">Üniversite E-posta Adresi</label>
+                            <input type="email" id="edu_email" name="edu_email" placeholder="ogrenci@selcuk.edu.tr" required>
+                            <p class="form-hint">Üniversiteniz tarafından verilen .edu.tr uzantılı e-posta adresinizi girin</p>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="student_number">Öğrenci Numarası</label>
                             <input type="text" id="student_number" name="student_number" placeholder="20201234567" required>
                         </div>
-                        <div class="form-group">
-                            <label for="uni_password">Öğrenci Bilgi Sistemi Şifresi</label>
-                            <input type="password" id="uni_password" name="uni_password" placeholder="••••••••" required>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary" id="verifyBtn">
+                        
+                        <button type="submit" class="btn-primary" id="sendCodeBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            Doğrulama Kodu Gönder
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Step 2: Verification Code Form -->
+                <div id="formStep2" style="display: none;">
+                    <div class="code-sent-notice">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                             <polyline points="22 4 12 14.01 9 11.01"/>
                         </svg>
-                        Doğrulamayı Başlat
+                        <div>
+                            <strong>Doğrulama kodu gönderildi!</strong>
+                            <p id="sentToEmail">ogrenci@selcuk.edu.tr</p>
+                        </div>
+                    </div>
+                    
+                    <form id="codeForm">
+                        <div class="form-group">
+                            <label for="verification_code">Doğrulama Kodu</label>
+                            <input type="text" id="verification_code" name="verification_code" placeholder="123456" maxlength="6" required class="code-input">
+                            <p class="form-hint">E-posta adresinize gönderilen 6 haneli kodu girin</p>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" id="verifyCodeBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            Doğrula
+                        </button>
+                        
+                        <button type="button" class="btn-secondary" id="resendCodeBtn">
+                            Kodu Tekrar Gönder
+                        </button>
+                    </form>
+                    
+                    <button type="button" class="btn-link" id="backToStep1">
+                        ← Bilgileri Düzenle
                     </button>
-                </form>
+                </div>
             </div>
         </div>
         
@@ -804,8 +909,22 @@
     
     <script>
     (function() {
+        // Elements
         var verificationForm = document.getElementById('verificationForm');
-        var verifyBtn = document.getElementById('verifyBtn');
+        var codeForm = document.getElementById('codeForm');
+        var sendCodeBtn = document.getElementById('sendCodeBtn');
+        var verifyCodeBtn = document.getElementById('verifyCodeBtn');
+        var resendCodeBtn = document.getElementById('resendCodeBtn');
+        var backToStep1 = document.getElementById('backToStep1');
+        var formStep1 = document.getElementById('formStep1');
+        var formStep2 = document.getElementById('formStep2');
+        var step1 = document.getElementById('step1');
+        var step2 = document.getElementById('step2');
+        var step3 = document.getElementById('step3');
+        var sentToEmail = document.getElementById('sentToEmail');
+        
+        var userEmail = '';
+        var studentNumber = '';
         
         // Kullanıcı bilgilerini yükle
         fetch('/api/v1/auth/me')
@@ -836,7 +955,7 @@
                     }
                     
                     document.getElementById('registerDate').textContent = new Date().toLocaleDateString('tr-TR');
-                    document.getElementById('universityName').textContent = 'Selçuk Üniversitesi'; // Varsayılan
+                    document.getElementById('universityName').textContent = 'Selçuk Üniversitesi';
                 } else {
                     window.location.href = '/giris';
                 }
@@ -845,19 +964,80 @@
                 window.location.href = '/giris';
             });
         
-        // Form submit
+        // Spinner HTML
+        var spinnerHTML = '<span style="width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block;margin-right:8px;"></span>';
+        
+        // Step 1: Send verification code
         verificationForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            verifyBtn.disabled = true;
-            verifyBtn.innerHTML = '<span style="width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block;"></span> Doğrulanıyor...';
+            userEmail = document.getElementById('edu_email').value;
+            studentNumber = document.getElementById('student_number').value;
+            
+            // Validate .edu.tr email
+            if (!userEmail.endsWith('.edu.tr')) {
+                alert('Lütfen .edu.tr uzantılı bir üniversite e-posta adresi girin.');
+                return;
+            }
+            
+            sendCodeBtn.disabled = true;
+            sendCodeBtn.innerHTML = spinnerHTML + 'Gönderiliyor...';
+            
+            // Simüle edilmiş kod gönderimi (API entegre edilecek)
+            setTimeout(function() {
+                // Show step 2
+                formStep1.style.display = 'none';
+                formStep2.style.display = 'block';
+                step1.classList.remove('active');
+                step2.classList.add('active');
+                sentToEmail.textContent = userEmail;
+                
+                sendCodeBtn.disabled = false;
+                sendCodeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Doğrulama Kodu Gönder';
+            }, 1500);
+        });
+        
+        // Step 2: Verify code
+        codeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var code = document.getElementById('verification_code').value;
+            
+            if (code.length !== 6) {
+                alert('Lütfen 6 haneli doğrulama kodunu girin.');
+                return;
+            }
+            
+            verifyCodeBtn.disabled = true;
+            verifyCodeBtn.innerHTML = spinnerHTML + 'Doğrulanıyor...';
             
             // Simüle edilmiş doğrulama (API entegre edilecek)
             setTimeout(function() {
-                alert('Doğrulama sistemi yakında aktif olacaktır. Şu anda test aşamasındayız.');
-                verifyBtn.disabled = false;
-                verifyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Doğrulamayı Başlat';
-            }, 2000);
+                alert('Doğrulama sistemi yakında aktif olacaktır. Girdiğiniz kod: ' + code);
+                verifyCodeBtn.disabled = false;
+                verifyCodeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Doğrula';
+            }, 1500);
+        });
+        
+        // Resend code
+        resendCodeBtn.addEventListener('click', function() {
+            resendCodeBtn.disabled = true;
+            resendCodeBtn.textContent = 'Gönderiliyor...';
+            
+            setTimeout(function() {
+                alert('Doğrulama kodu tekrar gönderildi: ' + userEmail);
+                resendCodeBtn.disabled = false;
+                resendCodeBtn.textContent = 'Kodu Tekrar Gönder';
+            }, 1500);
+        });
+        
+        // Back to step 1
+        backToStep1.addEventListener('click', function() {
+            formStep2.style.display = 'none';
+            formStep1.style.display = 'block';
+            step2.classList.remove('active');
+            step1.classList.add('active');
+            document.getElementById('verification_code').value = '';
         });
     })();
     </script>
