@@ -37,6 +37,10 @@ $router->get('/cikis', function() {
     Core\Response::redirect('/giris');
 });
 
+$router->get('/panel', function() {
+    require __DIR__ . '/shared/views/panel.php';
+});
+
 // =====================================================
 // API ROUTES
 // =====================================================
