@@ -790,57 +790,165 @@
         
         /* ===== FOOTER ===== */
         footer {
-            padding: 64px 0;
             background: var(--ink);
             color: white;
+            position: relative;
+            overflow: hidden;
         }
         
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+        
+        .footer-main {
+            padding: 80px 0 48px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 48px;
+        }
+        
+        .footer-brand {
+            max-width: 280px;
         }
         
         .footer-logo {
             display: flex;
             align-items: center;
             gap: 12px;
+            margin-bottom: 20px;
         }
         
         .footer-logo .logo-mark {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
         }
         
         .footer-logo .logo-mark span {
-            font-size: 16px;
-        }
-        
-        .footer-logo-text {
-            font-weight: 600;
             font-size: 18px;
         }
         
-        .footer-links {
-            display: flex;
-            gap: 32px;
+        .footer-logo-text {
+            font-weight: 700;
+            font-size: 20px;
         }
         
-        .footer-links a {
+        .footer-brand p {
+            font-size: 15px;
             color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
         
-        .footer-links a:hover {
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+            transition: all 0.2s;
+        }
+        
+        .footer-social a:hover {
+            background: var(--teal);
             color: white;
+        }
+        
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 24px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 14px;
+        }
+        
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+        
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+        
+        .footer-contact-item svg {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            color: var(--teal);
+        }
+        
+        .footer-bottom {
+            padding: 24px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .footer-copy {
             font-size: 14px;
             color: rgba(255,255,255,0.4);
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-legal a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        
+        .footer-legal a:hover {
+            color: rgba(255,255,255,0.7);
         }
         
         /* ===== RESPONSIVE ===== */
@@ -922,13 +1030,44 @@
                 font-size: 32px;
             }
             
-            .footer-content {
-                flex-direction: column;
-                gap: 32px;
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 60px 0 40px;
+            }
+            
+            .footer-brand {
+                max-width: 100%;
                 text-align: center;
             }
             
-            .footer-links {
+            .footer-logo {
+                justify-content: center;
+            }
+            
+            .footer-social {
+                justify-content: center;
+            }
+            
+            .footer-column {
+                text-align: center;
+            }
+            
+            .footer-column a:hover {
+                transform: none;
+            }
+            
+            .footer-contact-item {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .footer-legal {
                 flex-wrap: wrap;
                 justify-content: center;
             }
@@ -1185,21 +1324,66 @@
     
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-mark"><span>K</span></div>
-                    <span class="footer-logo-text">Kampüs Portal</span>
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-mark"><span>K</span></div>
+                        <span class="footer-logo-text">Kampüs Portal</span>
+                    </div>
+                    <p>Bağışçılar ve öğrencileri bir araya getiren güvenli platform. Bağışlarınız doğrudan ihtiyaç sahibi öğrencilere ulaşır.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                    </div>
                 </div>
                 
-                <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#nasil-calisir">Nasıl Çalışır?</a></li>
+                        <li><a href="#ozellikler">Özellikler</a></li>
+                        <li><a href="#pilot">Pilot Proje</a></li>
+                        <li><a href="/kayit">Kayıt Ol</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Destek</h4>
+                    <ul>
+                        <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="#">Yardım Merkezi</a></li>
+                        <li><a href="#">Bize Ulaşın</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>İletişim</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>info@kampusportal.com.tr</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Konya, Türkiye<br>Selçuk Üniversitesi Kampüsü</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    © <?= date('Y') ?> Kampüs Portal. Tüm hakları saklıdır.
+                </div>
+                <div class="footer-legal">
                     <a href="#">Gizlilik Politikası</a>
                     <a href="#">Kullanım Şartları</a>
                     <a href="#">KVKK</a>
-                    <a href="mailto:info@kampusportal.com.tr">İletişim</a>
-                </div>
-                
-                <div class="footer-copy">
-                    © <?= date('Y') ?> Kampüs Portal
                 </div>
             </div>
         </div>
