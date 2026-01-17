@@ -145,6 +145,107 @@
             gap: 16px;
         }
         
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+        
+        .mobile-menu-btn:hover {
+            background: var(--surface-alt);
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--ink);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--surface);
+            z-index: 999;
+            padding: 24px;
+            flex-direction: column;
+        }
+        
+        .mobile-nav.active {
+            display: flex;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .mobile-nav-close {
+            width: 44px;
+            height: 44px;
+            background: var(--surface-alt);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--ink);
+        }
+        
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .mobile-nav-links a {
+            display: block;
+            padding: 16px 20px;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        
+        .mobile-nav-links a:hover {
+            background: var(--surface-alt);
+        }
+        
+        .mobile-nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .mobile-nav-buttons .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+        }
+        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -978,6 +1079,10 @@
                 padding: 0 20px;
             }
             
+            header {
+                background: var(--surface);
+            }
+            
             .header-inner {
                 height: 64px;
             }
@@ -986,25 +1091,53 @@
                 display: none;
             }
             
+            .header-actions .btn-ghost {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .hero {
-                padding: 120px 0 80px;
+                padding: 100px 0 60px;
             }
             
             .hero h1 {
-                font-size: 36px;
+                font-size: 32px;
+                letter-spacing: -1px;
+            }
+            
+            .hero-tag {
+                font-size: 13px;
+                padding: 6px 12px;
             }
             
             .hero-desc {
-                font-size: 17px;
+                font-size: 16px;
             }
             
             .hero-buttons {
                 flex-direction: column;
             }
             
+            .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
             .hero-stats {
                 flex-wrap: wrap;
-                gap: 32px;
+                gap: 24px;
+            }
+            
+            .hero-stat {
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            .hero-stat-value {
+                font-size: 28px;
             }
             
             .hero-float-1,
@@ -1012,33 +1145,100 @@
                 display: none;
             }
             
+            .hero-card {
+                padding: 24px;
+                border-radius: 16px;
+            }
+            
             .section {
-                padding: 80px 0;
+                padding: 60px 0;
+            }
+            
+            .section-header {
+                margin-bottom: 40px;
             }
             
             .section-header h2,
             .pilot-text h2 {
-                font-size: 32px;
+                font-size: 28px;
+            }
+            
+            .section-header p {
+                font-size: 16px;
             }
             
             .steps-grid,
             .features-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .step-card {
+                padding: 32px 24px;
+            }
+            
+            .step-number {
+                top: -12px;
+                left: 24px;
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            
+            .feature-card {
+                padding: 24px;
+            }
+            
+            .pilot-text p {
+                font-size: 16px;
+            }
+            
+            .pilot-badge {
+                padding: 14px 20px;
+            }
+            
+            .pilot-map {
+                padding: 32px;
+            }
+            
+            .pilot-pin {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .pilot-pin span {
+                font-size: 24px;
+            }
+            
+            .pilot-city {
+                font-size: 24px;
+            }
+            
+            .cta {
+                padding: 80px 0;
             }
             
             .cta h2 {
-                font-size: 32px;
+                font-size: 28px;
+            }
+            
+            .cta p {
+                font-size: 16px;
             }
             
             .footer-main {
                 grid-template-columns: 1fr;
                 gap: 40px;
-                padding: 60px 0 40px;
+                padding: 48px 0 32px;
             }
             
             .footer-brand {
                 max-width: 100%;
                 text-align: center;
+            }
+            
+            .footer-brand p {
+                font-size: 14px;
             }
             
             .footer-logo {
@@ -1053,23 +1253,105 @@
                 text-align: center;
             }
             
+            .footer-column h4 {
+                margin-bottom: 16px;
+            }
+            
             .footer-column a:hover {
                 transform: none;
             }
             
             .footer-contact-item {
                 justify-content: center;
+                text-align: center;
             }
             
             .footer-bottom {
                 flex-direction: column;
                 gap: 16px;
                 text-align: center;
+                padding: 20px 0;
             }
             
             .footer-legal {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .header-inner {
+                height: 60px;
+            }
+            
+            .logo-mark {
+                width: 38px;
+                height: 38px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .hero {
+                padding: 90px 0 50px;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero-desc {
+                font-size: 15px;
+            }
+            
+            .hero-stats {
+                padding-top: 32px;
+            }
+            
+            .hero-stat-value {
+                font-size: 24px;
+            }
+            
+            .hero-stat-label {
+                font-size: 12px;
+            }
+            
+            .section {
+                padding: 48px 0;
+            }
+            
+            .section-header h2,
+            .pilot-text h2 {
+                font-size: 24px;
+            }
+            
+            .step-card {
+                padding: 28px 20px;
+            }
+            
+            .step-icon {
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
+            }
+            
+            .cta {
+                padding: 60px 0;
+            }
+            
+            .cta h2 {
+                font-size: 24px;
+            }
+            
+            .footer-main {
+                padding: 40px 0 24px;
+                gap: 32px;
             }
         }
     </style>
@@ -1092,10 +1374,35 @@
                 <div class="header-actions">
                     <a href="/giris" class="btn btn-ghost">Giriş Yap</a>
                     <a href="/kayit" class="btn btn-primary">Kayıt Ol</a>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menü">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="/" class="logo">
+                <div class="logo-mark"><span>K</span></div>
+                <span class="logo-text">Kampüs Portal</span>
+            </a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Kapat">✕</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="#nasil-calisir">Nasıl Çalışır?</a>
+            <a href="#ozellikler">Özellikler</a>
+            <a href="#pilot">Pilot Proje</a>
+        </div>
+        <div class="mobile-nav-buttons">
+            <a href="/giris" class="btn btn-ghost">Giriş Yap</a>
+            <a href="/kayit" class="btn btn-primary">Kayıt Ol</a>
+        </div>
+    </div>
     
     <section class="hero">
         <div class="container">
@@ -1388,5 +1695,31 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+    (function() {
+        var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        var mobileNav = document.getElementById('mobileNav');
+        var mobileNavClose = document.getElementById('mobileNavClose');
+        var mobileNavLinks = mobileNav.querySelectorAll('a');
+        
+        function openMobileNav() {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileNav() {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMobileNav);
+        mobileNavClose.addEventListener('click', closeMobileNav);
+        
+        mobileNavLinks.forEach(function(link) {
+            link.addEventListener('click', closeMobileNav);
+        });
+    })();
+    </script>
 </body>
 </html>

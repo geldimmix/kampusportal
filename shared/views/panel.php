@@ -475,35 +475,190 @@
         /* Responsive */
         @media (max-width: 768px) {
             .navbar {
-                padding: 0 20px;
+                padding: 0 16px;
+                height: 64px;
+            }
+            
+            .logo-mark {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
             }
             
             .user-details {
                 display: none;
             }
             
-            .main {
-                padding: 24px 16px;
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
             }
             
-            .status-card, .verification-body {
-                padding: 24px;
+            .btn-ghost {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .main {
+                padding: 20px 16px;
+            }
+            
+            .status-card {
+                padding: 24px 20px;
+                border-radius: 16px;
+            }
+            
+            .status-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+            
+            .status-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+            }
+            
+            .status-text h2 {
+                font-size: 20px;
+            }
+            
+            .status-text p {
+                font-size: 14px;
+            }
+            
+            .verification-card {
+                border-radius: 16px;
             }
             
             .verification-header {
-                padding: 20px 24px;
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            
+            .verification-header-icon {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .verification-header-text h3 {
+                font-size: 17px;
+            }
+            
+            .verification-body {
+                padding: 20px;
+            }
+            
+            .verification-steps {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .step {
+                padding: 12px 14px;
+            }
+            
+            .alert-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px;
+            }
+            
+            .alert-box-content h4 {
+                font-size: 14px;
+            }
+            
+            .alert-box-content p {
+                font-size: 13px;
+            }
+            
+            .security-notice {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px;
+            }
+            
+            .security-notice p {
+                font-size: 13px;
             }
             
             .form-row {
                 grid-template-columns: 1fr;
             }
             
-            .verification-steps {
-                flex-direction: column;
+            .form-group input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 12px 14px;
+            }
+            
+            .btn-primary {
+                padding: 14px 20px;
+                font-size: 15px;
             }
             
             .info-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .info-card {
+                padding: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                height: 60px;
+            }
+            
+            .user-menu {
+                gap: 12px;
+            }
+            
+            .main {
+                padding: 16px 12px;
+            }
+            
+            .status-card {
+                padding: 20px 16px;
+                margin-bottom: 16px;
+            }
+            
+            .status-text h2 {
+                font-size: 18px;
+            }
+            
+            .verification-header {
+                padding: 16px;
+            }
+            
+            .verification-body {
+                padding: 16px;
+            }
+            
+            .verification-steps {
+                margin-bottom: 20px;
+            }
+            
+            .alert-box,
+            .security-notice {
+                margin-bottom: 20px;
+            }
+            
+            .form-group {
+                margin-bottom: 16px;
+            }
+            
+            .form-group label {
+                font-size: 13px;
             }
         }
     </style>

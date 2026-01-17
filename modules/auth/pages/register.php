@@ -319,18 +319,117 @@
         .hidden { display: none !important; }
         
         /* Responsive */
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
+            body {
+                padding: 24px 16px;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 24px;
+            }
+            
+            .logo-mark {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
             .card {
-                padding: 28px 24px;
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+            
+            .card-header {
+                margin-bottom: 24px;
+            }
+            
+            .card-header h1 {
+                font-size: 24px;
+            }
+            
+            .card-header p {
+                font-size: 14px;
+            }
+            
+            .role-tabs {
+                padding: 4px;
+                border-radius: 10px;
+                margin-bottom: 24px;
+            }
+            
+            .role-tab {
+                padding: 12px 14px;
+                font-size: 14px;
+                gap: 6px;
+            }
+            
+            .role-tab svg {
+                width: 16px;
+                height: 16px;
             }
             
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .form-group {
+                margin-bottom: 16px;
+            }
+            
+            .form-group label {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+            
+            .form-group input,
+            .form-group select {
+                padding: 12px 14px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
+            }
+            
+            .checkbox-group {
+                margin-bottom: 16px;
+            }
+            
+            .checkbox-group label {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 14px 20px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            
+            .card-footer {
+                margin-top: 20px;
+                padding-top: 20px;
+            }
+            
+            .card-footer p {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            body {
+                padding: 16px 12px;
+            }
+            
+            .card {
+                padding: 24px 16px;
             }
             
             .role-tab {
-                padding: 12px 16px;
-                font-size: 14px;
+                padding: 10px 12px;
+                font-size: 13px;
             }
         }
     </style>

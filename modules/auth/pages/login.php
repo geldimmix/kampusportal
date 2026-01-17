@@ -291,15 +291,95 @@
         }
         
         /* Responsive */
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
+            body {
+                padding: 24px 16px;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 24px;
+            }
+            
+            .logo-mark {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
             .card {
-                padding: 28px 24px;
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+            
+            .card-header {
+                margin-bottom: 24px;
+            }
+            
+            .card-header h1 {
+                font-size: 24px;
+            }
+            
+            .card-header p {
+                font-size: 14px;
+            }
+            
+            .form-group {
+                margin-bottom: 16px;
+            }
+            
+            .form-group label {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+            
+            .form-group input {
+                padding: 12px 14px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
             }
             
             .form-options {
                 flex-direction: column;
                 gap: 12px;
                 align-items: flex-start;
+                margin-bottom: 20px;
+            }
+            
+            .checkbox-group label {
+                font-size: 14px;
+            }
+            
+            .forgot-link {
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 14px 20px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            
+            .divider {
+                margin: 24px 0;
+            }
+            
+            .card-footer p {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            body {
+                padding: 16px 12px;
+            }
+            
+            .card {
+                padding: 24px 16px;
             }
         }
     </style>
