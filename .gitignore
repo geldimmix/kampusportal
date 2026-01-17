@@ -1,0 +1,45 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Dependencies
+/vendor/
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+config/local.php
+
+# Logs
+*.log
+logs/
+
+# Cache
+/cache/
+*.cache
+
+# Uploads (user content)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.temp
+/tmp/
+
+# Compiled files
+*.compiled.php
+
+# Sensitive data
+*.pem
+*.key
+secrets/
+
