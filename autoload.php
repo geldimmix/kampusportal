@@ -20,7 +20,12 @@ spl_autoload_register(function ($class) {
         }
         
         $relativeClass = substr($class, $len);
-        $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
+        // Klasör adlarını küçük harfe çevir (Linux case-sensitive)
+        $parts = explode('\\', $relativeClass);
+        $className = array_pop($parts); // Son eleman class adı, onu olduğu gibi bırak
+        $path = implode('/', array_map('strtolower', $parts));
+        
+        $file = $baseDir . ($path ? $path . '/' : '') . $className . '.php';
         
         if (file_exists($file)) {
             require $file;
