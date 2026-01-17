@@ -649,7 +649,6 @@
             padding: 16px 24px;
             background: var(--surface-alt);
             border-radius: 12px;
-            margin-bottom: 40px;
         }
         
         .pilot-badge-icon {
@@ -1156,7 +1155,9 @@
                         </div>
                     </div>
                     
-                    <a href="/kayit" class="btn btn-teal btn-lg">Pilot Projeye Katıl</a>
+                    <div style="margin-top: 32px;">
+                        <a href="/kayit" class="btn btn-teal btn-lg">Pilot Projeye Katıl</a>
+                    </div>
                 </div>
                 
                 <div class="pilot-visual">
