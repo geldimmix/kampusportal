@@ -4,42 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giriş Yap - Kampüs Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --primary: #1e40af;
-            --primary-light: #3b82f6;
-            --text: #1f2937;
-            --text-light: #6b7280;
-            --bg: #ffffff;
-            --bg-alt: #f9fafb;
-            --border: #e5e7eb;
+            --ink: #0f1419;
+            --ink-light: #536471;
+            --ink-faint: #8899a6;
+            --surface: #ffffff;
+            --surface-dim: #f7f9fa;
+            --surface-alt: #eff3f4;
+            --teal: #0d9488;
+            --teal-dark: #0f766e;
+            --teal-light: #ccfbf1;
+            --border: #e1e8ed;
             --error: #dc2626;
-            --success: #16a34a;
+            --error-light: #fee2e2;
+            --success: #059669;
+            --success-light: #d1fae5;
         }
         
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-alt);
+            font-family: 'Outfit', sans-serif;
+            background: var(--surface-dim);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 40px 20px;
+            line-height: 1.5;
         }
         
-        .login-container {
+        .login-wrapper {
             width: 100%;
-            max-width: 400px;
-        }
-        
-        .login-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
+            max-width: 420px;
         }
         
         .logo {
@@ -47,101 +48,211 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 32px;
             text-decoration: none;
-            color: var(--text);
+            margin-bottom: 32px;
         }
         
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            border-radius: 10px;
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
-            font-size: 16px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 20px;
         }
         
         .logo-text {
             font-weight: 700;
-            font-size: 20px;
+            font-size: 22px;
+            color: var(--ink);
+            letter-spacing: -0.5px;
         }
         
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 8px;
-            color: var(--text);
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
         }
         
-        .subtitle {
+        .card-header {
             text-align: center;
-            color: var(--text-light);
             margin-bottom: 32px;
+        }
+        
+        .card-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        
+        .card-header p {
+            color: var(--ink-light);
             font-size: 15px;
         }
         
+        /* Form */
         .form-group {
             margin-bottom: 20px;
         }
         
-        label {
+        .form-group label {
             display: block;
             font-size: 14px;
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
         }
         
-        input {
+        .form-group input {
             width: 100%;
-            padding: 12px 14px;
+            padding: 14px 16px;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 15px;
             font-family: inherit;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            color: var(--ink);
+            background: var(--surface);
+            transition: all 0.2s;
         }
         
-        input:focus {
+        .form-group input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            border-color: var(--teal);
+            box-shadow: 0 0 0 4px var(--teal-light);
         }
         
+        .form-group input::placeholder {
+            color: var(--ink-faint);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--teal);
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            font-size: 14px;
+            color: var(--ink-light);
+            cursor: pointer;
+        }
+        
+        .forgot-link {
+            font-size: 14px;
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Alert */
+        .alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        
+        .alert.error {
+            background: var(--error-light);
+            color: var(--error);
+            display: flex;
+        }
+        
+        .alert.success {
+            background: var(--success-light);
+            color: var(--success);
+            display: flex;
+        }
+        
+        /* Button */
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 16px 24px;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
             font-family: inherit;
-            background: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--ink);
             color: white;
-            transition: background 0.2s;
         }
         
-        .btn:hover {
-            background: var(--primary-light);
+        .btn-primary:hover {
+            background: #2a3842;
+            transform: translateY(-1px);
         }
         
-        .btn:disabled {
+        .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
         
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Divider */
         .divider {
             display: flex;
             align-items: center;
-            margin: 24px 0;
-            color: var(--text-light);
-            font-size: 13px;
+            gap: 16px;
+            margin: 28px 0;
         }
         
         .divider::before,
@@ -153,72 +264,58 @@
         }
         
         .divider span {
-            padding: 0 16px;
+            font-size: 13px;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .register-link {
+        /* Footer */
+        .card-footer {
             text-align: center;
-            color: var(--text-light);
-            font-size: 14px;
         }
         
-        .register-link a {
-            color: var(--primary);
+        .card-footer p {
+            font-size: 15px;
+            color: var(--ink-light);
+        }
+        
+        .card-footer a {
+            color: var(--teal);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .register-link a:hover {
+        .card-footer a:hover {
             text-decoration: underline;
         }
         
-        .alert {
-            padding: 12px 14px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-        
-        .alert-error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: var(--error);
-        }
-        
-        .alert-success {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: var(--success);
-        }
-        
-        .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        /* Responsive */
+        @media (max-width: 500px) {
+            .card {
+                padding: 28px 24px;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-card">
-            <a href="/" class="logo">
-                <div class="logo-icon">KP</div>
-                <span class="logo-text">Kampüs Portal</span>
-            </a>
-            
-            <h1>Giriş Yap</h1>
-            <p class="subtitle">Hesabınıza erişin</p>
+    <div class="login-wrapper">
+        <a href="/" class="logo">
+            <div class="logo-mark">K</div>
+            <span class="logo-text">Kampüs Portal</span>
+        </a>
+        
+        <div class="card">
+            <div class="card-header">
+                <h1>Tekrar Hoş Geldiniz</h1>
+                <p>Hesabınıza giriş yapın</p>
+            </div>
             
             <div id="alert" class="alert"></div>
             
@@ -233,69 +330,83 @@
                     <input type="password" id="password" name="password" placeholder="••••••••" required>
                 </div>
                 
-                <button type="submit" class="btn" id="submitBtn">Giriş Yap</button>
+                <div class="form-options">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Beni hatırla</label>
+                    </div>
+                    <a href="#" class="forgot-link">Şifremi unuttum</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="submitBtn">Giriş Yap</button>
             </form>
             
-            <div class="divider"><span>veya</span></div>
+            <div class="divider">
+                <span>veya</span>
+            </div>
             
-            <p class="register-link">
-                Hesabınız yok mu? <a href="/kayit">Kayıt Ol</a>
-            </p>
+            <div class="card-footer">
+                <p>Hesabınız yok mu? <a href="/kayit">Kayıt Ol</a></p>
+            </div>
         </div>
     </div>
     
     <script>
-        const form = document.getElementById('loginForm');
-        const alert = document.getElementById('alert');
-        const submitBtn = document.getElementById('submitBtn');
+    (function() {
+        var form = document.getElementById('loginForm');
+        var alert = document.getElementById('alert');
+        var submitBtn = document.getElementById('submitBtn');
         
-        form.addEventListener('submit', async (e) => {
+        function showAlert(message, type) {
+            var icon = type === 'error' 
+                ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'
+                : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+            alert.innerHTML = icon + '<span>' + message + '</span>';
+            alert.className = 'alert ' + type;
+        }
+        
+        function hideAlert() {
+            alert.className = 'alert';
+            alert.innerHTML = '';
+        }
+        
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
+            hideAlert();
             
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner"></span> Giriş yapılıyor...';
-            alert.style.display = 'none';
             
-            try {
-                const response = await fetch('/api/v1/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: document.getElementById('email').value,
-                        password: document.getElementById('password').value
-                    })
-                });
-                
-                const result = await response.json();
-                
+            var data = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+            
+            fetch('/api/v1/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(result) {
                 if (result.success) {
-                    alert.className = 'alert alert-success';
-                    alert.textContent = 'Giriş başarılı! Yönlendiriliyorsunuz...';
-                    alert.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        const role = result.data.user.role;
-                        if (['super_admin', 'foundation_admin', 'foundation_staff'].includes(role)) {
-                            window.location.href = '/yonetim';
-                        } else {
-                            window.location.href = '/panel';
-                        }
+                    showAlert('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
+                    setTimeout(function() {
+                        window.location.href = '/panel';
                     }, 1000);
                 } else {
-                    alert.className = 'alert alert-error';
-                    alert.textContent = result.message;
-                    alert.style.display = 'block';
+                    showAlert(result.message || 'Giriş başarısız', 'error');
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Giriş Yap';
+                    submitBtn.innerHTML = 'Giriş Yap';
                 }
-            } catch (error) {
-                alert.className = 'alert alert-error';
-                alert.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
-                alert.style.display = 'block';
+            })
+            .catch(function(err) {
+                showAlert('Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Giriş Yap';
-            }
+                submitBtn.innerHTML = 'Giriş Yap';
+            });
         });
+    })();
     </script>
 </body>
 </html>
