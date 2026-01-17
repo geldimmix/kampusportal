@@ -10,206 +10,291 @@
         
         :root {
             --primary: #1e40af;
-            --primary-light: #3b82f6;
-            --secondary: #059669;
-            --text: #1f2937;
-            --text-light: #6b7280;
+            --primary-hover: #1e3a8a;
+            --primary-light: #dbeafe;
+            --success: #059669;
+            --success-light: #d1fae5;
+            --text: #111827;
+            --text-secondary: #6b7280;
             --bg: #ffffff;
-            --bg-alt: #f9fafb;
-            --border: #e5e7eb;
+            --bg-page: #f3f4f6;
+            --border: #d1d5db;
             --error: #dc2626;
-            --success: #16a34a;
+            --error-light: #fee2e2;
         }
         
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-alt);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-page);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
+            line-height: 1.5;
         }
         
-        .register-container { width: 100%; max-width: 440px; }
+        .container {
+            width: 100%;
+            max-width: 480px;
+        }
         
-        .register-card {
+        .card {
             background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 32px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
         }
         
         .logo {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 32px;
+            gap: 10px;
             text-decoration: none;
             color: var(--text);
+            margin-bottom: 20px;
         }
         
-        .logo-icon {
-            width: 40px;
-            height: 40px;
+        .logo-box {
+            width: 36px;
+            height: 36px;
             background: var(--primary);
-            border-radius: 10px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
         }
         
-        .logo-text { font-weight: 700; font-size: 20px; }
-        
-        h1 { font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 8px; }
-        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 24px; font-size: 15px; }
-        
-        .role-selector {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
+        .logo-name {
+            font-weight: 600;
+            font-size: 18px;
         }
         
-        .role-btn {
-            padding: 16px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg);
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        /* Role Seçici */
+        .role-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: var(--bg-page);
+            padding: 4px;
+            border-radius: 6px;
+        }
+        
+        .role-tab {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-        }
-        
-        .role-btn:hover { border-color: var(--primary); }
-        
-        .role-btn.active {
-            border-color: var(--primary);
-            background: #eff6ff;
-        }
-        
-        .role-btn .icon { font-size: 24px; margin-bottom: 8px; }
-        .role-btn .title { font-weight: 600; font-size: 15px; color: var(--text); }
-        .role-btn .desc { font-size: 12px; color: var(--text-light); margin-top: 4px; }
-        
-        .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .form-group { margin-bottom: 16px; }
-        
-        label { display: block; font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-        
-        input, select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 15px;
             font-family: inherit;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background: var(--bg);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.15s;
         }
         
-        input:focus, select:focus {
+        .role-tab:hover {
+            color: var(--text);
+        }
+        
+        .role-tab.active {
+            background: var(--bg);
+            color: var(--primary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* Form */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text);
+            background: var(--bg);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+            box-shadow: 0 0 0 3px var(--primary-light);
         }
         
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            background: var(--primary);
-            color: white;
-            transition: background 0.2s;
+        .form-group input::placeholder {
+            color: var(--text-secondary);
         }
         
-        .btn:hover { background: var(--primary-light); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        
-        .login-link {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 14px;
-            margin-top: 24px;
-        }
-        
-        .login-link a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .alert {
-            padding: 12px 14px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-        
-        .alert-error { background: #fef2f2; border: 1px solid #fecaca; color: var(--error); }
-        .alert-success { background: #f0fdf4; border: 1px solid #bbf7d0; color: var(--success); }
-        
-        .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
-            margin-right: 8px;
-        }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .checkbox-label {
+        /* Checkbox */
+        .checkbox-row {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .checkbox-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+        }
+        
+        .checkbox-row label {
             font-size: 14px;
             color: var(--text);
             cursor: pointer;
         }
         
-        .checkbox-label input { width: auto; }
+        /* Alert */
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
         
-        #studentFields, #donorFields { display: none; }
+        .alert.error {
+            background: var(--error-light);
+            color: var(--error);
+            display: block;
+        }
+        
+        .alert.success {
+            background: var(--success-light);
+            color: var(--success);
+            display: block;
+        }
+        
+        /* Buton */
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Gizli alanlar */
+        .hidden { display: none !important; }
+        
+        /* Loading state for select */
+        select.loading {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cstyle%3E.spinner{transform-origin:center;animation:rotate 1s linear infinite}@keyframes rotate{100%{transform:rotate(360deg)}}%3C/style%3E%3Ccircle class='spinner' cx='12' cy='12' r='8' fill='none' stroke='%236b7280' stroke-width='2' stroke-dasharray='32' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <div class="register-container">
-        <div class="register-card">
-            <a href="/" class="logo">
-                <div class="logo-icon">KP</div>
-                <span class="logo-text">Kampüs Portal</span>
-            </a>
-            
-            <h1>Hesap Oluştur</h1>
-            <p class="subtitle">Rol seçerek başlayın</p>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <a href="/" class="logo">
+                    <div class="logo-box">KP</div>
+                    <span class="logo-name">Kampüs Portal</span>
+                </a>
+                <h1>Hesap Oluştur</h1>
+                <p class="subtitle">Sisteme kayıt olarak başlayın</p>
+            </div>
             
             <div id="alert" class="alert"></div>
             
-            <div class="role-selector">
-                <div class="role-btn active" data-role="beneficiary">
-                    <div class="icon">🎓</div>
-                    <div class="title">Öğrenci</div>
-                    <div class="desc">Yemek desteği al</div>
-                </div>
-                <div class="role-btn" data-role="donor">
-                    <div class="icon">❤️</div>
-                    <div class="title">Bağışçı</div>
-                    <div class="desc">Destek ol</div>
-                </div>
+            <div class="role-tabs">
+                <button type="button" class="role-tab active" data-role="beneficiary">Öğrenci</button>
+                <button type="button" class="role-tab" data-role="donor">Bağışçı</button>
             </div>
             
             <form id="registerForm">
@@ -237,128 +322,180 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="password">Şifre (min 8 karakter)</label>
-                    <input type="password" id="password" name="password" minlength="8" required>
+                    <label for="password">Şifre</label>
+                    <input type="password" id="password" name="password" minlength="8" placeholder="En az 8 karakter" required>
                 </div>
                 
+                <!-- Öğrenci Alanları -->
                 <div id="studentFields">
                     <div class="form-group">
                         <label for="university">Üniversite</label>
-                        <select id="university" name="university">
-                            <option value="">Üniversite seçin</option>
+                        <select id="university" name="university_id" class="loading">
+                            <option value="">Yükleniyor...</option>
                         </select>
                     </div>
                 </div>
                 
-                <div id="donorFields">
-                    <div class="form-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="is_corporate" name="is_corporate">
-                            Kurumsal bağışçıyım
-                        </label>
+                <!-- Bağışçı Alanları -->
+                <div id="donorFields" class="hidden">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="is_corporate" name="is_corporate">
+                        <label for="is_corporate">Kurumsal bağışçıyım</label>
                     </div>
-                    <div class="form-group" id="companyField" style="display:none;">
+                    <div class="form-group hidden" id="companyField">
                         <label for="company_name">Şirket Adı</label>
                         <input type="text" id="company_name" name="company_name">
                     </div>
                 </div>
                 
-                <button type="submit" class="btn" id="submitBtn">Kayıt Ol</button>
+                <button type="submit" class="btn-primary" id="submitBtn">Kayıt Ol</button>
             </form>
             
-            <p class="login-link">
+            <p class="footer-text">
                 Zaten hesabınız var mı? <a href="/giris">Giriş Yap</a>
             </p>
         </div>
     </div>
     
     <script>
-        const roleButtons = document.querySelectorAll('.role-btn');
-        const roleInput = document.getElementById('role');
-        const studentFields = document.getElementById('studentFields');
-        const donorFields = document.getElementById('donorFields');
+    (function() {
         const form = document.getElementById('registerForm');
         const alert = document.getElementById('alert');
         const submitBtn = document.getElementById('submitBtn');
+        const roleInput = document.getElementById('role');
+        const studentFields = document.getElementById('studentFields');
+        const donorFields = document.getElementById('donorFields');
+        const universitySelect = document.getElementById('university');
+        const roleTabs = document.querySelectorAll('.role-tab');
+        const isCorporate = document.getElementById('is_corporate');
+        const companyField = document.getElementById('companyField');
         
         // Üniversiteleri yükle
-        fetch('/api/v1/universities')
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    const select = document.getElementById('university');
-                    data.data.forEach(uni => {
-                        const option = document.createElement('option');
-                        option.value = uni.id;
-                        option.textContent = uni.name + ' (' + uni.city + ')';
-                        select.appendChild(option);
-                    });
-                }
-            });
-        
-        roleButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                roleButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const role = btn.dataset.role;
-                roleInput.value = role;
-                
-                studentFields.style.display = role === 'beneficiary' ? 'block' : 'none';
-                donorFields.style.display = role === 'donor' ? 'block' : 'none';
-            });
-        });
-        
-        document.getElementById('is_corporate').addEventListener('change', function() {
-            document.getElementById('companyField').style.display = this.checked ? 'block' : 'none';
-        });
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('rol') === 'bagisci') {
-            document.querySelector('[data-role="donor"]').click();
+        function loadUniversities() {
+            fetch('/api/v1/universities')
+                .then(function(res) {
+                    if (!res.ok) throw new Error('API hatası');
+                    return res.json();
+                })
+                .then(function(data) {
+                    universitySelect.innerHTML = '<option value="">Üniversite seçin</option>';
+                    universitySelect.classList.remove('loading');
+                    
+                    if (data.success && data.data && data.data.length > 0) {
+                        data.data.forEach(function(uni) {
+                            var option = document.createElement('option');
+                            option.value = uni.id;
+                            option.textContent = uni.name + ' - ' + uni.city;
+                            universitySelect.appendChild(option);
+                        });
+                    } else {
+                        showAlert('Üniversite listesi yüklenemedi.', 'error');
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Üniversite yükleme hatası:', err);
+                    universitySelect.innerHTML = '<option value="">Yüklenemedi</option>';
+                    universitySelect.classList.remove('loading');
+                    showAlert('Üniversite listesi yüklenirken hata oluştu.', 'error');
+                });
         }
         
-        form.addEventListener('submit', async (e) => {
+        // Alert göster
+        function showAlert(message, type) {
+            alert.textContent = message;
+            alert.className = 'alert ' + type;
+        }
+        
+        // Alert gizle
+        function hideAlert() {
+            alert.className = 'alert';
+        }
+        
+        // Rol değiştir
+        function switchRole(role) {
+            roleInput.value = role;
+            
+            roleTabs.forEach(function(tab) {
+                tab.classList.toggle('active', tab.dataset.role === role);
+            });
+            
+            if (role === 'beneficiary') {
+                studentFields.classList.remove('hidden');
+                donorFields.classList.add('hidden');
+            } else {
+                studentFields.classList.add('hidden');
+                donorFields.classList.remove('hidden');
+            }
+        }
+        
+        // Rol tab tıklama
+        roleTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                switchRole(this.dataset.role);
+            });
+        });
+        
+        // Kurumsal checkbox
+        isCorporate.addEventListener('change', function() {
+            companyField.classList.toggle('hidden', !this.checked);
+        });
+        
+        // URL parametresinden rol al
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('rol') === 'bagisci') {
+            switchRole('donor');
+        }
+        
+        // Form gönder
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
+            hideAlert();
             
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner"></span> Kaydediliyor...';
-            alert.style.display = 'none';
+            submitBtn.innerHTML = '<span class="spinner"></span>Kaydediliyor...';
             
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
+            var formData = new FormData(form);
+            var data = {};
+            formData.forEach(function(value, key) {
+                data[key] = value;
+            });
             
-            try {
-                const response = await fetch('/api/v1/auth/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                
-                const result = await response.json();
-                
+            // Checkbox için düzeltme
+            data.is_corporate = isCorporate.checked;
+            
+            fetch('/api/v1/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(result) {
                 if (result.success) {
-                    alert.className = 'alert alert-success';
-                    alert.textContent = 'Kayıt başarılı! Yönlendiriliyorsunuz...';
-                    alert.style.display = 'block';
-                    setTimeout(() => { window.location.href = '/panel'; }, 1000);
+                    showAlert('Kayıt başarılı! Yönlendiriliyorsunuz...', 'success');
+                    setTimeout(function() {
+                        window.location.href = '/panel';
+                    }, 1500);
                 } else {
-                    alert.className = 'alert alert-error';
-                    let msg = result.message;
-                    if (result.errors) msg += ': ' + Object.values(result.errors).join(', ');
-                    alert.textContent = msg;
-                    alert.style.display = 'block';
+                    var msg = result.message || 'Kayıt başarısız';
+                    if (result.errors) {
+                        var errors = Object.values(result.errors);
+                        if (errors.length > 0) msg += ': ' + errors.join(', ');
+                    }
+                    showAlert(msg, 'error');
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Kayıt Ol';
                 }
-            } catch (error) {
-                alert.className = 'alert alert-error';
-                alert.textContent = 'Bir hata oluştu.';
-                alert.style.display = 'block';
+            })
+            .catch(function(err) {
+                showAlert('Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Kayıt Ol';
-            }
+            });
         });
+        
+        // Sayfa yüklendiğinde üniversiteleri getir
+        loadUniversities();
+    })();
     </script>
 </body>
 </html>
