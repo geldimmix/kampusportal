@@ -318,6 +318,32 @@
         /* Conditional Fields */
         .hidden { display: none !important; }
         
+        /* Info Note */
+        .info-note {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-note svg {
+            width: 20px;
+            height: 20px;
+            color: #2563eb;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        
+        .info-note p {
+            font-size: 14px;
+            color: #1e40af;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
         /* Responsive */
         @media (max-width: 600px) {
             body {
@@ -463,6 +489,15 @@
                     </svg>
                     Bağışçı
                 </button>
+                <button type="button" class="role-tab" data-role="company">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18"/>
+                        <path d="M5 21V7l8-4v18"/>
+                        <path d="M19 21V11l-6-4"/>
+                        <path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/>
+                    </svg>
+                    Firma
+                </button>
             </div>
             
             <form id="registerForm">
@@ -506,13 +541,43 @@
                 
                 <!-- Bağışçı Alanları -->
                 <div id="donorFields" class="hidden">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="is_corporate" name="is_corporate">
-                        <label for="is_corporate">Kurumsal bağışçıyım</label>
+                    <div class="info-note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        <p>Bireysel bağışçı olarak kaydoluyorsunuz. Bağışlarınız doğrudan ihtiyaç sahibi öğrencilere ulaşacaktır.</p>
                     </div>
-                    <div class="form-group hidden" id="companyField">
-                        <label for="company_name">Şirket Adı</label>
-                        <input type="text" id="company_name" name="company_name" placeholder="Şirket adını girin">
+                </div>
+                
+                <!-- Firma Alanları -->
+                <div id="companyFields" class="hidden">
+                    <div class="form-group">
+                        <label for="company_name">Firma / Şirket Adı</label>
+                        <input type="text" id="company_name" name="company_name" placeholder="ABC Teknoloji A.Ş.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tax_number">Vergi Numarası</label>
+                        <input type="text" id="tax_number" name="tax_number" placeholder="1234567890">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tax_office">Vergi Dairesi</label>
+                        <input type="text" id="tax_office" name="tax_office" placeholder="Konya Vergi Dairesi">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company_address">Firma Adresi</label>
+                        <input type="text" id="company_address" name="company_address" placeholder="Firma adresi">
+                    </div>
+                    
+                    <div class="info-note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        <p>Kurumsal bağışçı olarak kaydoluyorsunuz. Bağışlarınız için fatura düzenlenebilir.</p>
                     </div>
                 </div>
                 
@@ -533,10 +598,9 @@
         var roleInput = document.getElementById('role');
         var studentFields = document.getElementById('studentFields');
         var donorFields = document.getElementById('donorFields');
+        var companyFields = document.getElementById('companyFields');
         var universitySelect = document.getElementById('university');
         var roleTabs = document.querySelectorAll('.role-tab');
-        var isCorporate = document.getElementById('is_corporate');
-        var companyField = document.getElementById('companyField');
         
         // Üniversiteleri yükle
         function loadUniversities() {
@@ -588,12 +652,18 @@
                 tab.classList.toggle('active', tab.dataset.role === role);
             });
             
+            // Tüm alanları gizle
+            studentFields.classList.add('hidden');
+            donorFields.classList.add('hidden');
+            companyFields.classList.add('hidden');
+            
+            // İlgili alanı göster
             if (role === 'beneficiary') {
                 studentFields.classList.remove('hidden');
-                donorFields.classList.add('hidden');
-            } else {
-                studentFields.classList.add('hidden');
+            } else if (role === 'donor') {
                 donorFields.classList.remove('hidden');
+            } else if (role === 'company') {
+                companyFields.classList.remove('hidden');
             }
         }
         
@@ -602,11 +672,6 @@
             tab.addEventListener('click', function() {
                 switchRole(this.dataset.role);
             });
-        });
-        
-        // Kurumsal checkbox
-        isCorporate.addEventListener('change', function() {
-            companyField.classList.toggle('hidden', !this.checked);
         });
         
         // URL parametresinden rol al
@@ -629,7 +694,13 @@
                 data[key] = value;
             });
             
-            data.is_corporate = isCorporate.checked;
+            // Firma kaydı ise is_corporate true yap
+            if (data.role === 'company') {
+                data.role = 'donor'; // Backend'de donor olarak kaydedilecek
+                data.is_corporate = true;
+            } else {
+                data.is_corporate = false;
+            }
             
             fetch('/api/v1/auth/register', {
                 method: 'POST',
